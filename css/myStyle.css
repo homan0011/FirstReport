@@ -1,0 +1,10 @@
+.div-button{
+	display: block;
+	vertical-align: middle; 
+	text-align: center;
+	color: white;
+	background-color: #40d47e;
+	height: 30px;
+	line-height: 30px;
+	width:80px;
+}
