@@ -1,4 +1,3 @@
-//var [div, input, ul, li] = ["div", "input", "ul", "li"].map(React.createFactory);
 var div = React.createFactory("div");
 var form = React.createFactory("form");
 var input = React.createFactory("input");
@@ -19,16 +18,43 @@ var Button = React.createClass({
 });
 var myButton = React.createFactory(Button);
 
-// var LoginForm = React.createElement({
-// 	render: function(){
-// 		return(
-// 		);
-// 	}
-// });
+var LoginForm = React.createClass({
+	render: function(){
+		return(
+			form(
+				null,
+				div(null, "Login"),
+				input(null)
+			)
+		);
+	}
+});
+var myloginForm = React.createFactory(LoginForm);
 
-var App = React.createClass({
+var RegForm = React.createClass({
+	render: function(){
+		return(
+			form(
+				null,
+				div(null, "Register"),
+				input(null)
+			)
+		);
+	}
+});
+var myRegForm = React.createFactory(RegForm);
+
+var LoginApp = React.createClass({
+	getInitialState: function(){
+		return {currentForm: myloginForm(null)};
+	},
+
 	handleButtOnClick: function(event){
-		console.log(event.target.id);
+		if(event.target.id == "loginButton"){
+			this.setState({currentForm: myloginForm(null)});
+		}else{
+			this.setState({currentForm: myRegForm(null)});
+		}
 	},
 
 	render: function(){
@@ -45,31 +71,11 @@ var App = React.createClass({
 					id: "regButton",
 					label: "Register"
 				}
-				)
+				),
+				this.state.currentForm
 			)
-			// React.createElement("div", null,
-			// 	React.createElement(
-			// 		Button,
-			// 		{
-			// 			onClick: this.handleButtOnClick,
-			// 			id: "loginButton",
-			// 			label: "Login"
-			// 		},
-			// 		null
-			// 	),
-
-			// 	React.createElement(
-			// 		Button,
-			// 		{
-			// 			onClick: this.handleButtOnClick,
-			// 			id: "regButton",
-			// 			label: "Register"
-			// 		},
-			// 		null
-			// 	)
-			// )
 		);
 	}
 });
 
-ReactDOM.render(React.createElement(App, null), document.getElementById("content"));
+ReactDOM.render(React.createElement(LoginApp, null), document.getElementById("content"));
